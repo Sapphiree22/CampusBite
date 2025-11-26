@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CampusBite | Log In</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Inter", sans-serif; }
+        body { background: #fff6ef; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; padding-top: 90px; }
+
+        /* HEADER */
+        .top-navbar { position: fixed; top: 0; left: 0; width: 100%; height: 70px; background: white; display: flex; align-items: center; padding: 0 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); z-index: 1000; }
+        .nav-back { display: flex; align-items: center; gap: 8px; text-decoration: none; color: #4b5563; font-weight: 500; font-size: 15px; transition: color 0.2s; z-index: 2; }
+        .nav-back:hover { color: #ff5b00; }
+
+        /* --- LOGO + TEXT STYLES --- */
+        .nav-logo-container {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Space between Image and Text */
+            z-index: 1; 
+        }
+
+        .nav-logo-img {
+            height: 35px; /* Adjust this to match text size */
+            width: auto;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 19px;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .logo-text span {
+            color: #ff5b00; /* Orange color for "Bite" */
+        }
+        /* -------------------------- */
+
+        /* LOGIN CARD */
+        .login-container { background: white; width: 100%; max-width: 380px; padding: 35px; border-radius: 14px; box-shadow: 0px 8px 20px rgba(0,0,0,0.1); text-align: center; }
+        h2 { font-size: 26px; font-weight: 700; color: #1f2937; }
+        .subtitle { margin-top: 8px; color: #6b7280; font-size: 14px; margin-bottom: 25px; }
+        .input-box { text-align: left; margin-bottom: 18px; }
+        label { font-size: 14px; font-weight: 500; color: #374151; }
+        .input-field { width: 100%; padding: 12px; border: 1.5px solid #ddd; border-radius: 8px; margin-top: 6px; font-size: 14px; transition: border 0.3s; }
+        .input-field:focus { border-color: #ff5b00; outline: none; }
+        .input-error { border-color: #ef4444 !important; background-color: #fef2f2; }
+        
+        .login-btn { width: 100%; background: #ff5b00; color: white; padding: 12px 0; border: none; border-radius: 8px; font-size: 15px; margin-top: 10px; cursor: pointer; font-weight: 600; display: flex; justify-content: center; align-items: center; gap: 6px; transition: background 0.3s; }
+        .login-btn:hover { background: #e04f00; }
+        .login-btn:disabled { background: #fdba8c; cursor: not-allowed; }
+
+        .forgot-link { display: block; text-align: right; margin-top: -10px; margin-bottom: 20px; font-size: 13px; color: #6b7280; text-decoration: none; cursor: pointer; }
+        .forgot-link:hover { color: #ff5b00; }
+        .signup-text { margin-top: 18px; font-size: 14px; color: #6b7280; }
+        .signup-text a { color: #ff5b00; text-decoration: none; font-weight: 600; }
+
+        /* TOAST & MODAL */
+        #toast-box { position: fixed; top: 30px; left: 50%; transform: translateX(-50%); z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
+        .toast { min-width: 300px; background: white; padding: 12px 20px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 500; animation: slideIn 0.3s ease-out; border-left: 4px solid #333; }
+        .toast.success { border-left-color: #10b981; color: #065f46; }
+        .toast.error { border-left-color: #ef4444; color: #7f1d1d; }
+        @keyframes slideIn { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(2px); }
+        .modal-content { background: white; padding: 30px; border-radius: 12px; width: 90%; max-width: 360px; text-align: center; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); animation: popUp 0.3s ease; }
+        @keyframes popUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .modal-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+        .modal-desc { font-size: 13px; color: #6b7280; margin-bottom: 20px; line-height: 1.5; }
+        .close-modal { margin-top: 15px; background: transparent; color: #6b7280; border: none; cursor: pointer; font-size: 13px; text-decoration: underline; }
+        .otp-field { text-align: center; letter-spacing: 8px; font-size: 18px; font-weight: 700; }
+    </style>
+</head>
+
+<body>
+
+    <div id="toast-box"></div>
+
+    <header class="top-navbar">
+        <a href="index.html" class="nav-back"><i data-lucide="arrow-left"></i> Back</a>
+        
+        <div class="nav-logo-container">
+            <img src="images/CampusBiteLogo.png" alt="CampusBite Logo" class="nav-logo-img">
+            <div class="logo-text">Campus<span>Bite</span></div>
+        </div>
+        </header>
+
+    <div class="login-container">
+        <h2>Welcome Back</h2>
+        <p class="subtitle">Log in to continue ordering</p>
+
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            <div class="input-box">
+                <label>Email or Student Number</label>
+                <input type="text" id="loginId" class="input-field" placeholder="Enter email or student no.">
+            </div>
+            <div class="input-box">
+                <label>4-digit PIN</label>
+                <input type="password" id="loginPin" maxlength="4" class="input-field" placeholder="••••" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+            </div>
+            <a onclick="openModal()" class="forgot-link">Forgot Password?</a>
+            <button type="submit" class="login-btn"><i data-lucide="log-in"></i> Log In</button>
+        </form>
+
+        <p class="signup-text">Don't have an account? <a href="signup.html">Sign Up</a></p>
+    </div>
+
+    <div id="forgotModal" class="modal-overlay">
+        <div class="modal-content">
+            <div style="background: #fff6ef; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px auto; color: #ff5b00;">
+                <i data-lucide="lock-keyhole"></i>
+            </div>
+            
+            <h3 class="modal-title" id="modalTitle">Reset Password</h3>
+            
+            <div id="step1">
+                <p class="modal-desc">Enter your registered email address. We will send you a code.</p>
+                <input type="email" id="resetEmail" class="input-field" placeholder="name@school.edu" style="margin-bottom: 15px;">
+                <button type="button" class="login-btn" id="sendOtpBtn" onclick="sendOTP()">Send Code</button>
+            </div>
+
+            <div id="step2" style="display: none;">
+                <p class="modal-desc">Enter the 4-digit code sent to <b id="displayEmail"></b></p>
+                <input type="text" id="otpInput" maxlength="4" class="input-field otp-field" placeholder="0000" style="margin-bottom: 15px;" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                <button type="button" class="login-btn" onclick="verifyOTP()">Verify Code</button>
+            </div>
+
+            <div id="step3" style="display: none;">
+                <p class="modal-desc">Identity verified! Create your new 4-digit PIN.</p>
+                <div class="input-box" style="margin-bottom: 10px;">
+                    <label>New PIN</label>
+                    <input type="password" id="newPin" maxlength="4" class="input-field" placeholder="••••" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                </div>
+                <div class="input-box" style="margin-bottom: 15px;">
+                    <label>Confirm PIN</label>
+                    <input type="password" id="confirmNewPin" maxlength="4" class="input-field" placeholder="••••" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                </div>
+                <button type="button" class="login-btn" onclick="resetFinal()">Update Password</button>
+            </div>
+
+            <button class="close-modal" onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // --- TOAST NOTIFICATION ---
+        function showToast(message, type = 'info') {
+            const box = document.getElementById('toast-box');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            let icon = type === 'success' ? 'check-circle' : 'alert-circle';
+            toast.innerHTML = `<i data-lucide="${icon}" style="width:18px;"></i> <span>${message}</span>`;
+            box.appendChild(toast);
+            lucide.createIcons();
+            setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 3500);
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const id = document.getElementById('loginId').value;
+            const pin = document.getElementById('loginPin').value;
+            
+            if(id && pin.length === 4) {
+                 showToast("Login Successful! Redirecting...", "success");
+                 // TODO: Add backend login call here
+            } else {
+                 showToast("Please enter a valid ID and 4-digit PIN", "error");
+            }
+        }
+
+        // --- FORGOT PASSWORD LOGIC (MOCK) ---
+        const modal = document.getElementById('forgotModal');
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
+        const step3 = document.getElementById('step3');
+        const modalTitle = document.getElementById('modalTitle');
+        let generatedOTP = null;
+
+        function openModal() {
+            modal.style.display = "flex";
+            step1.style.display = "block";
+            step2.style.display = "none";
+            step3.style.display = "none";
+            modalTitle.innerText = "Reset Password";
+            document.getElementById('resetEmail').value = "";
+            document.getElementById('resetEmail').classList.remove('input-error');
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        function sendOTP() {
+            const email = document.getElementById('resetEmail').value;
+            if(!email.includes('@')) {
+                showToast("Invalid email address", "error");
+                document.getElementById('resetEmail').classList.add('input-error');
+                return;
+            }
+            document.getElementById('resetEmail').classList.remove('input-error');
+
+            // 1. Generate Fake Code
+            generatedOTP = Math.floor(1000 + Math.random() * 9000);
+            
+            // 2. UI Loading State
+            const btn = document.getElementById('sendOtpBtn');
+            const originalText = btn.innerText;
+            btn.innerText = "Sending...";
+            btn.disabled = true;
+
+            // 3. Simulate Backend Delay (1.5 seconds)
+            setTimeout(() => {
+                showToast(`Code sent to ${email}`, "success");
+                
+                // --- DEMO ALERT ---
+                alert(`[Backend Simulation]\n\nYour OTP Code is: ${generatedOTP}`);
+                
+                document.getElementById('displayEmail').innerText = email;
+                step1.style.display = "none";
+                step2.style.display = "block";
+                
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }, 1500);
+        }
+
+        function verifyOTP() {
+            const userOtp = document.getElementById('otpInput').value;
+            if(parseInt(userOtp) === generatedOTP) {
+                showToast("Verified! Create new PIN.", "success");
+                step2.style.display = "none";
+                step3.style.display = "block";
+                modalTitle.innerText = "Create New PIN";
+            } else {
+                showToast("Invalid Code.", "error");
+                document.getElementById('otpInput').classList.add('input-error');
+            }
+        }
+
+        function resetFinal() {
+            const newPin = document.getElementById('newPin').value;
+            const confirmNewPin = document.getElementById('confirmNewPin').value;
+
+            if(newPin.length !== 4) {
+                showToast("PIN must be 4 digits", "error");
+                return;
+            }
+            if(newPin !== confirmNewPin) {
+                showToast("PINs do not match", "error");
+                return;
+            }
+
+            // Success
+            showToast("Password updated successfully!", "success");
+            setTimeout(() => {
+                closeModal();
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
