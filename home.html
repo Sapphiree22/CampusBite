@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CampusBite | Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+    <div id="toast-box"></div>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <img src="images/CampusBiteLogo.png" alt="Logo" class="nav-logo">
+            <span class="nav-brand">Campus<span>Bite</span></span>
+        </div>
+        <div class="nav-center">
+            <button class="nav-link active" onclick="switchTab('home')">Home</button>
+            <button class="nav-link" onclick="switchTab('menu')">Food</button>
+            <button class="nav-link" onclick="switchTab('tables')">Tables</button>
+            <button class="nav-link" onclick="switchTab('profile')">Profile</button>
+        </div>
+        <div class="nav-right">
+            <button class="cart-btn" onclick="toggleCart()">
+                <i data-lucide="shopping-bag"></i> Cart
+                <span id="cart-count" class="cart-count">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <main id="home-view" class="view active">
+        <section class="hero-section">
+            <div class="hero-text">
+                <div class="badge-pill"><i data-lucide="alarm-clock" size="16"></i> Skip the lunch rush. Order Ahead</div>
+                <h1>Pre-order Your<br>Favorite <span>Campus</span><br>Dishes</h1>
+                <p>Skip the cafeteria lines during peak hours. Order ahead and pick up your meal when it's ready.</p>
+                <div class="hero-cta">
+                    <button class="btn-primary" onclick="switchTab('menu')">Order Now</button>
+                    <button class="btn-secondary" onclick="switchTab('tables')">Reserve a Table</button>
+                </div>
+                <div class="hero-stats-row">
+                    <div class="mini-stat"><strong>₱10-60</strong><span>Price</span></div>
+                    <div class="mini-stat"><strong>5-15m</strong><span>Wait</span></div>
+                    <div class="mini-stat"><strong>15+</strong><span>Items</span></div>
+                </div>
+            </div>
+            <div class="hero-images-grid">
+                <div class="hero-image-tall"><img src="images/AfterlightImage_2.webp" alt="Main Dish"></div>
+                <div class="hero-image-col">
+                    <img src="images/fried-siomai-a-chinese.jpg" alt="Side Dish 1">
+                    <img src="images/inihaw-liempo-3.jpg" alt="Side Dish 2">
+                    <img src="images/ND-Lumpia-lhfz-mediumSquareAt3X.jpg" alt="Side Dish 3">
+                </div>
+            </div>
+        </section>
+
+        <section class="popularity-section">
+            <div class="pop-header"><i data-lucide="trending-up"></i><h2>Popular Today</h2></div>
+            <div class="pop-list">
+                <div class="pop-card" onclick="switchTab('menu')">
+                    <div class="pop-left"><div class="pop-rank">#1</div><div class="pop-info"><h3>Ngohiong</h3><p>23 Orders Today</p></div></div><div class="pop-price">₱12</div>
+                </div>
+                <div class="pop-card" onclick="switchTab('menu')">
+                    <div class="pop-left"><div class="pop-rank">#2</div><div class="pop-info"><h3>Pancit Bihon</h3><p>18 Orders Today</p></div></div><div class="pop-price">₱15</div>
+                </div>
+                <div class="pop-card" onclick="switchTab('menu')">
+                    <div class="pop-left"><div class="pop-rank">#3</div><div class="pop-info"><h3>Fried Siomai</h3><p>15 Orders Today</p></div></div><div class="pop-price">₱12</div>
+                </div>
+                <div class="pop-card" onclick="switchTab('menu')">
+                    <div class="pop-left"><div class="pop-rank">#4</div><div class="pop-info"><h3>Sinugbang Baboy</h3><p>12 Orders Today</p></div></div><div class="pop-price">₱60</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <main id="menu-view" class="view">
+        <div class="section-header"><h1>Our <span>Menu</span></h1></div>
+        <div id="menu-container" class="menu-list"></div>
+    </main>
+
+    <main id="tables-view" class="view">
+        <div class="section-header"><h1>Reserve A <span>Table</span></h1></div>
+        <div class="reservation-card-full">
+            <div class="res-header-green" id="table-header">
+                <div class="res-icon-circle" id="table-icon"><i data-lucide="users"></i></div>
+                <div class="res-text">
+                    <h3 id="table-count-display">20 Tables Available</h3>
+                    <p id="table-subtext">0 out of 20 tables reserved today</p>
+                </div>
+                <span class="res-badge" id="table-badge">Available</span>
+            </div>
+            <div class="res-body">
+                <h3>Reservation Details</h3>
+                <div class="res-grid">
+                    <div class="res-input-group">
+                        <label>Time</label>
+                        <div class="res-input-wrapper"><input type="time" id="res-time" value="11:00" min="11:00" max="17:00"></div>
+                        <small>Available 11:00 AM - 5:00 PM</small>
+                    </div>
+                    <div class="res-input-group">
+                        <label>Party Size</label>
+                        <div class="res-input-wrapper"><input type="number" id="res-size" placeholder="How many people?" min="1" max="7"></div>
+                        <small>Maximum 7 people</small>
+                    </div>
+                </div>
+                <button class="res-btn-orange" id="res-btn" onclick="handleReservation()">
+                    <i data-lucide="calendar" style="width:18px;"></i> Reserve Table
+                </button>
+            </div>
+        </div>
+        <div class="walkin-blue-banner"><h3>Walk-ins Welcome</h3><p>Can't find a suitable time? Walk-ins are welcome.</p></div>
+        <div class="res-footer-text"><p>Same-day reservations only • Limited to 1.5 hours</p><p>Please arrive within 15 minutes</p></div>
+    </main>
+
+    <main id="profile-view" class="view">
+        <div class="profile-card">
+            <div class="profile-left">
+                <div class="avatar-big">KB</div>
+                <h2>Kathleen Joie Belda</h2>
+                <p>Student Account</p>
+                <button class="logout-link-btn" onclick="location.href='index.html'">Log Out</button>
+            </div>
+            <div class="profile-right">
+                <h3>Account Details</h3>
+                <div class="p-row"><span>Student Number</span><b>2023-12345</b></div>
+                <div class="p-row"><span>Course / Year</span><b>BSIT - 3rd Year</b></div>
+                <div class="p-row"><span>Email Address</span><b>kathleen.belda@student.school.edu</b></div>
+                <div class="p-row"><span>Member Since</span><b>Aug 2023</b></div>
+            </div>
+        </div>
+    </main>
+
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div id="cart-main-view">
+            <div class="cart-header">
+                <h2>Your Tray</h2>
+                <button class="close-cart" onclick="toggleCart()"><i data-lucide="x"></i></button>
+            </div>
+            <div id="cart-items" class="cart-items"></div>
+            <div class="cart-footer">
+                <div class="total-row"><span>Total</span><span id="cart-total">₱0.00</span></div>
+                <button class="checkout-btn" onclick="processCheckout()">Checkout</button>
+                <button class="clear-cart-btn" onclick="clearCart()">Clear Cart</button>
+            </div>
+        </div>
+
+        <div id="receipt-view" class="receipt-view" style="display: none;">
+            <div class="cart-header"><h2>Receipt</h2><button class="close-cart" onclick="closeReceipt()"><i data-lucide="x"></i></button></div>
+            <div class="receipt-body">
+                <div class="receipt-success"><i data-lucide="check-circle"></i><h3>Order Confirmed</h3><p>Your order has been placed successfully</p></div>
+                <div class="receipt-box-green">
+                    <div class="receipt-icon-circle"><i data-lucide="receipt"></i></div>
+                    <h3 id="receipt-order-id">Order #CB...</h3>
+                    <div class="ready-time"><i data-lucide="clock" size="14"></i> <span id="ready-mins">2</span> minutes</div>
+                    <div class="show-pickup">Please show this at pickup</div>
+                </div>
+                <div class="receipt-items-list" id="receipt-items-list"></div>
+                <div class="receipt-total-row"><span>Total Paid</span><span class="total-price" id="receipt-total-price">₱0</span></div>
+                <button class="continue-btn" onclick="closeReceipt()">Continue Ordering</button>
+                <div class="receipt-footer">Save this order number<br>Payment: Cash or GCash at pickup</div>
+            </div>
+        </div>
+    </div>
+    <div id="overlay" class="overlay" onclick="toggleCart()"></div>
+
+    <footer class="footer">
+        <div class="footer-left">
+            <div class="footer-brand">
+                <img src="images/CampusBiteLogo.png" alt="CampusBite Logo" class="footer-logo-img">
+                <h2>Campus<span>Bite</span></h2>
+            </div>
+            <p>Pre-order your favorite Filipino dishes and skip the cafeteria lines.</p>
+            <span id="footer-status-dot" class="status-dot"></span> <span id="footer-status-text">Checking...</span>
+        </div>
+        <div class="footer-mid">
+            <h3>Operating Hours</h3>
+            <p><i data-lucide="clock"></i> Monday – Friday<br>11:00 AM – 5:00 PM</p>
+            <div class="peak">Peak Hours: 12:00 – 1:30 PM</div>
+        </div>
+        <div class="footer-right">
+            <h3>Information</h3>
+            <p><i data-lucide="map-pin"></i> School Cafeteria<br>Campus</p>
+        </div>
+    </footer>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
