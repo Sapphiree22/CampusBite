@@ -1,0 +1,367 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+body {
+    background: #fff6ef; /* Kept your slight off-white background */
+    color: #222;
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 5%; /* Changed to % for better responsiveness */
+    border-bottom: 1px solid #eee;
+    background: #fff;
+    position: sticky; /* Keeps header visible */
+    top: 0;
+    z-index: 100;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* --- UPDATED LOGO STYLES --- */
+.logo {
+    height: 40px; /* Adjusted size for PNG */
+    width: auto;  /* Maintains aspect ratio */
+    object-fit: contain;
+    background: transparent; /* Removed gray background */
+    border-radius: 0; /* Removed border radius */
+}
+
+.brand {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.brand span {
+    color: #ff5b00;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.login {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #4b5563;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.signup {
+    background: #ff5b00;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* --- HERO SECTION (Updated Layout) --- */
+.hero {
+    padding: 60px 5%;
+    /* Flexbox to put Text on Left, Images on Right */
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    background: linear-gradient(90deg, #fff6ef, #ffffff);
+}
+
+.hero-content {
+    max-width: 550px; /* Prevents text from stretching too wide */
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #ffe4d4;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #ff5b00;
+    font-weight: 500;
+}
+
+.hero h2 {
+    margin-top: 20px;
+    font-size: 48px;
+    font-weight: 800; /* Made slightly bolder */
+    color: #1a1a1a;
+    line-height: 1.2;
+}
+
+.hero h2 span {
+    color: #ff5b00;
+}
+
+.subtext {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #555;
+    line-height: 1.5;
+}
+
+.hero-buttons {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+}
+
+.order-btn {
+    background: #ff5b00;
+    color: #fff;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.reserve-btn {
+    background: #fff;
+    border: 1.5px solid #ff5b00;
+    color: #ff5b00;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* --- NEW HERO STATS (Replaces old Metrics) --- */
+.hero-stats {
+    margin-top: 40px;
+    display: flex;
+    gap: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.stat h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ff5b00;
+}
+
+.stat p {
+    font-size: 14px;
+    color: #6b7280;
+    margin-top: 4px;
+}
+
+/* --- NEW HERO IMAGES GRID (1 Tall + 3 Small) --- */
+.hero-images-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr; /* Left col wider than right */
+    gap: 15px;
+    max-width: 650px;
+}
+
+.hero-image-tall img {
+    width: 100%;
+    height: 500px; /* Fixed height for the main image */
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.hero-image-col {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.hero-image-col img {
+    width: 100%;
+    height: 156px; /* 1/3rd of the tall image height roughly */
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* FEATURES */
+.features {
+    padding: 80px 5%;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.section-subtitle {
+    margin-top: 10px;
+    color: #6b7280;
+    font-size: 18px;
+}
+
+.feature-grid {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+.feature {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    text-align: left;
+}
+
+.feature h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.feature p {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #666;
+}
+
+.feature .icon {
+    width: 36px;
+    height: 36px;
+    color: #ff5b00;
+    margin-bottom: 15px;
+}
+
+/* HOW IT WORKS */
+.how {
+    padding: 80px 5%;
+    text-align: center;
+    background: white;
+}
+
+.steps {
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.step {
+    width: 300px;
+}
+
+.circle {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: #ff5b00;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 auto 20px;
+}
+
+.step h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.step p {
+    line-height: 1.5;
+    color: #666;
+}
+
+/* FOOTER */
+.footer {
+    background: #1f2937; /* Darker grey */
+    color: #d1d5db;
+    padding: 60px 5%;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 40px;
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.footer-brand .logo {
+    height: 30px; /* Smaller logo for footer */
+}
+
+.footer-brand h2 {
+    color: white;
+    font-size: 22px;
+}
+
+.footer-brand h2 span {
+    color: #ff5b00;
+}
+
+.footer-left p {
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #10b981; /* Green dot */
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.footer h3 {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.footer-mid p, .footer-right p {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.footer-mid .peak {
+    background: #374151;
+    color: #9ca3af;
+    padding: 5px 10px;
+    margin-top: 15px;
+    border-radius: 6px;
+    font-size: 13px;
+    display: inline-block;
+}
