@@ -1,0 +1,67 @@
+:root {
+    /* Primary */
+    --brand-orange: #ff5b00;
+    --btn-orange:   #ea580c;
+    --light-orange: #ffe4d4;
+    /* Neutrals */
+    --bg-cream:     #fff6ef;
+    --text-dark:    #1f2937;
+    --text-gray:    #6b7280;
+    --border-gray:  #e5e7eb;
+    /* Status */
+    --success:      #10b981;
+    --bg-success:   #dcfce7;
+    --error:        #ef4444;
+    --bg-error:     #fef2f2;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-cream);
+    color: var(--text-dark);
+}
+
+/* Utility classes using CSS variables */
+.bg-brand { background-color: var(--brand-orange); }
+.bg-btn { background-color: var(--btn-orange); }
+.hover-bg-btn:hover { background-color: var(--btn-orange); }
+.text-brand { color: var(--brand-orange); }
+.bg-light-orange { background-color: var(--light-orange); }
+.bg-success-light { background-color: var(--bg-success); }
+.text-success-dark { color: var(--success); }
+.bg-error-light { background-color: var(--bg-error); }
+.text-error-dark { color: var(--error); }
+.text-dark { color: var(--text-dark); }
+
+/* Custom scrollbar for better aesthetics */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: var(--bg-cream);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--brand-orange);
+    border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--btn-orange);
+}
+
+/* Sidebar styles */
+.sidebar {
+    width: 350px;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        position: fixed;
+        z-index: 50;
+        box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    }
+    .sidebar-open {
+        transform: translateX(0);
+    }
+}

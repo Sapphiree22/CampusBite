@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> CampusBite | Admin </title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Load Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Link to external CSS file in the 'css' folder -->
+    <link rel="stylesheet" href="css/style.css">
+    
+</head>
+<body class="flex flex-col md:flex-row">
+
+    <!-- Mobile Menu Button -->
+    <button id="menu-toggle" class="md:hidden fixed top-4 left-4 z-50 p-2 rounded-full bg-btn text-white shadow-lg">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar / Navigation -->
+    <aside id="sidebar" class="sidebar bg-brand text-white p-6 shadow-2xl flex-shrink-0">
+        <div class="flex justify-between items-center mb-10">
+            <h1 class="text-3xl font-extrabold tracking-tight">CampusBite | Admin </h1>
+            <button id="close-menu" class="md:hidden text-white opacity-75 hover:opacity-100">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+        </div>
+        
+        <nav>
+            <ul class="space-y-3">
+                <!-- Navigation Items -->
+                <li><a href="#" data-section="dashboard" class="nav-item flex items-center p-3 rounded-lg font-semibold bg-white text-brand shadow-md transition-colors duration-200">
+                    <i class="fas fa-chart-line w-6"></i><span class="ml-3">Dashboard</span>
+                </a></li>
+                <li><a href="#" data-section="reservations" class="nav-item flex items-center p-3 rounded-lg font-semibold hover:bg-white/20 transition-colors duration-200">
+                    <i class="fas fa-calendar-check w-6"></i><span class="ml-3">Reservations</span>
+                </a></li>
+                <li><a href="#" data-section="menu" class="nav-item flex items-center p-3 rounded-lg font-semibold hover:bg-white/20 transition-colors duration-200">
+                    <i class="fas fa-utensils w-6"></i><span class="ml-3">Menu Management</span>
+                </a></li>
+                <li><a href="#" data-section="analytics" class="nav-item flex items-center p-3 rounded-lg font-semibold hover:bg-white/20 transition-colors duration-200">
+                    <i class="fas fa-chart-pie w-6"></i><span class="ml-3">Analytics & Reports</span>
+                </a></li>
+                <li class="pt-4 border-t border-white/20"><a href="#" data-section="users" class="nav-item flex items-center p-3 rounded-lg font-semibold hover:bg-white/20 transition-colors duration-200">
+                    <i class="fas fa-user-shield w-6"></i><span class="ml-3">User & Staff Access</span>
+                </a></li>
+                <li><a href="#" data-section="settings" class="nav-item flex items-center p-3 rounded-lg font-semibold hover:bg-white/20 transition-colors duration-200">
+                    <i class="fas fa-cog w-6"></i><span class="ml-3">System Settings</span>
+                </a></li>
+                <li><a href="#" data-section="logs" class="nav-item flex items-center p-3 rounded-lg font-semibold hover:bg-white/20 transition-colors duration-200">
+                    <i class="fas fa-history w-6"></i><span class="ml-3">Activity Logs</span>
+                </a></li>
+            </ul>
+        </nav>
+        
+        <div class="mt-8 pt-4 border-t border-white/20">
+            <p class="text-sm opacity-75">Logged in as: <span class="font-bold">Super Admin</span></p>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow p-6 md:p-10 custom-scrollbar overflow-y-auto">
+        
+        <!-- Header -->
+        <header class="mb-8">
+            <h2 id="page-title" class="text-4xl font-extrabold text-dark">Dashboard Overview</h2>
+            <p class="text-text-gray mt-1">Manage all aspects of your web system efficiently.</p>
+        </header>
+
+        <!-- Dynamic Content Sections -->
+        <div id="content-area" class="space-y-12">
+            
+            <!-- 1. Dashboard Section -->
+            <section id="dashboard" class="content-section active space-y-8">
+                
+                <!-- Key Metrics Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Metric Card 1: Revenue -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg border border-border-gray">
+                        <div class="flex items-center justify-between">
+                            <i class="fas fa-dollar-sign text-2xl text-brand"></i>
+                            <span class="text-xs text-text-gray bg-light-orange py-1 px-3 rounded-full font-bold">+12% vs last week</span>
+                        </div>
+                        <p class="text-sm font-semibold text-text-gray mt-4">Total Revenue</p>
+                        <p class="text-3xl font-extrabold text-dark mt-1">₱15,840.00</p>
+                    </div>
+
+                    <!-- Metric Card 2: New Reservations -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg border border-border-gray">
+                        <div class="flex items-center justify-between">
+                            <i class="fas fa-calendar-alt text-2xl text-brand"></i>
+                            <span class="text-xs text-text-gray bg-bg-success py-1 px-3 rounded-full font-bold text-success-dark">3 Pending</span>
+                        </div>
+                        <p class="text-sm font-semibold text-text-gray mt-4">New Reservations (Today)</p>
+                        <p class="text-3xl font-extrabold text-dark mt-1">14</p>
+                    </div>
+
+                    <!-- Metric Card 3: Top Selling Item -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg border border-border-gray">
+                        <div class="flex items-center justify-between">
+                            <i class="fas fa-star text-2xl text-brand"></i>
+                            <span class="text-xs text-text-gray bg-light-orange py-1 px-3 rounded-full font-bold">Menu Data</span>
+                        </div>
+                        <p class="text-sm font-semibold text-text-gray mt-4">Top Ordered Food</p>
+                        <p class="text-3xl font-extrabold text-dark mt-1 truncate">Chicken Adobo</p>
+                    </div>
+
+                    <!-- Metric Card 4: System Availability -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg border border-border-gray">
+                        <div class="flex items-center justify-between">
+                            <i class="fas fa-clock text-2xl text-brand"></i>
+                            <span class="text-xs text-text-gray bg-bg-error py-1 px-3 rounded-full font-bold text-error-dark">Closes at 9 PM</span>
+                        </div>
+                        <p class="text-sm font-semibold text-text-gray mt-4">Current Status</p>
+                        <p class="text-3xl font-extrabold text-success-dark mt-1">Online</p>
+                    </div>
+                </div>
+
+                <!-- Pending Reservations & Top Items Table -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Pending Reservations (2/3 width) -->
+                    <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-lg border border-border-gray">
+                        <h3 class="text-xl font-bold text-dark mb-4">Pending Reservations</h3>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-border-gray">
+                                <thead class="bg-light-orange">
+                                    <tr>
+                                        <th class="px-4 py-2 text-left text-sm font-bold text-dark rounded-tl-lg">ID</th>
+                                        <th class="px-4 py-2 text-left text-sm font-bold text-dark">Customer</th>
+                                        <th class="px-4 py-2 text-left text-sm font-bold text-dark">Time/Date</th>
+                                        <th class="px-4 py-2 text-left text-sm font-bold text-dark">Status</th>
+                                        <th class="px-4 py-2 text-left text-sm font-bold text-dark rounded-tr-lg">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-border-gray">
+                                    <tr class="hover:bg-bg-cream transition-colors">
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-dark">#1001</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-text-gray">Jane Doe</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-text-gray">7:00 PM, 11/27</td>
+                                        <td class="px-4 py-3 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-light-orange text-brand">Pending</span>
+                                        </td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-right text-sm font-medium">
+                                            <button class="text-success-dark hover:text-success-dark/80 font-bold" onclick="alert('Confirming Reservation 1001')">Confirm</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-bg-cream transition-colors">
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-dark">#1002</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-text-gray">Mark Smith</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-text-gray">1:30 PM, 11/28</td>
+                                        <td class="px-4 py-3 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-light-orange text-brand">Pending</span>
+                                        </td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-right text-sm font-medium">
+                                            <button class="text-success-dark hover:text-success-dark/80 font-bold" onclick="alert('Confirming Reservation 1002')">Confirm</button>
+                                        </td>
+                                    </tr>
+                                    <!-- Add more dynamic data here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Top 3 Ordered Items (1/3 width) -->
+                    <div class="lg:col-span-1 bg-white p-6 rounded-xl shadow-lg border border-border-gray">
+                        <h3 class="text-xl font-bold text-dark mb-4">Top Items (Weekly)</h3>
+                        <ul class="space-y-3">
+                            <li class="flex justify-between items-center p-3 bg-bg-cream rounded-lg">
+                                <span class="font-semibold text-dark">1. Chicken Adobo</span>
+                                <span class="text-brand font-bold">120 Orders</span>
+                            </li>
+                            <li class="flex justify-between items-center p-3 bg-bg-cream rounded-lg">
+                                <span class="font-semibold text-dark">2. Beef Caldereta</span>
+                                <span class="text-brand font-bold">85 Orders</span>
+                            </li>
+                            <li class="flex justify-between items-center p-3 bg-bg-cream rounded-lg">
+                                <span class="font-semibold text-dark">3. Halo-Halo</span>
+                                <span class="text-brand font-bold">72 Orders</span>
+                            </li>
+                        </ul>
+                        <button class="mt-4 w-full py-2 bg-light-orange text-brand font-semibold rounded-lg hover:bg-light-orange/80 transition-colors" onclick="switchSection('analytics')">View Full Report</button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 2. Reservations Management Section -->
+            <section id="reservations" class="content-section hidden space-y-6">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-2xl font-bold text-dark">Reservation & Order Control</h3>
+                    <button class="bg-btn text-white px-4 py-2 rounded-lg font-semibold shadow-md hover-bg-btn transition-colors" onclick="alert('Opening modal for New Reservation')">
+                        <i class="fas fa-plus mr-2"></i>New Reservation
+                    </button>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-border-gray">
+                    <div class="flex flex-wrap gap-4 mb-4">
+                        <input type="text" placeholder="Search ID or Customer Name" class="p-2 border border-border-gray rounded-lg flex-grow max-w-sm">
+                        <select class="p-2 border border-border-gray rounded-lg">
+                            <option>Filter by Status</option>
+                            <option>Pending</option>
+                            <option>Confirmed</option>
+                            <option>Completed</option>
+                            <option>Canceled</option>
+                        </select>
+                        <button class="bg-light-orange text-brand px-4 py-2 rounded-lg font-semibold hover:bg-light-orange/80"><i class="fas fa-filter"></i></button>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-border-gray">
+                            <thead class="bg-light-orange">
+                                <tr>
+                                    <th class="px-4 py-2 text-left text-sm font-bold text-dark">ID</th>
+                                    <th class="px-4 py-2 text-left text-sm font-bold text-dark">Customer</th>
+                                    <th class="px-4 py-2 text-left text-sm font-bold text-dark">Date/Time</th>
+                                    <th class="px-4 py-2 text-left text-sm font-bold text-dark">Status</th>
+                                    <th class="px-4 py-2 text-left text-sm font-bold text-dark">Payment</th>
+                                    <th class="px-4 py-2 text-left text-sm font-bold text-dark">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-border-gray">
+                                <!-- Example Row 1: Pending -->
+                                <tr class="hover:bg-bg-cream transition-colors">
+                                    <td class="px-4 py-3 text-sm font-medium text-dark">#1003</td>
+                                    <td class="px-4 py-3 text-sm text-text-gray">Andrea Cruz</td>
+                                    <td class="px-4 py-3 text-sm text-text-gray">11:00 AM, 11/28</td>
+                                    <td class="px-4 py-3"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-light-orange text-brand">Pending</span></td>
+                                    <td class="px-4 py-3"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-bg-error text-error-dark">Unpaid</span></td>
+                                    <td class="px-4 py-3 space-x-2">
+                                        <button class="text-success-dark hover:text-success-dark/80 text-sm" onclick="alert('Confirmed reservation #1003')"><i class="fas fa-check"></i> Confirm</button>
+                                        <button class="text-brand hover:text-btn text-sm" onclick="alert('Editing reservation #1003')"><i class="fas fa-edit"></i> Edit</button>
+                                    </td>
+                                </tr>
+                                <!-- Example Row 2: Confirmed -->
+                                <tr class="hover:bg-bg-cream transition-colors">
+                                    <td class="px-4 py-3 text-sm font-medium text-dark">#1004</td>
+                                    <td class="px-4 py-3 text-sm text-text-gray">Robert Lee</td>
+                                    <td class="px-4 py-3 text-sm text-text-gray">8:30 PM, 11/27</td>
+                                    <td class="px-4 py-3"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-bg-success text-success-dark">Confirmed</span></td>
+                                    <td class="px-4 py-3"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-bg-success text-success-dark">Paid</span></td>
+                                    <td class="px-4 py-3 space-x-2">
+                                        <button class="text-text-dark hover:text-text-gray text-sm" onclick="alert('Marked as served #1004')"><i class="fas fa-utensils"></i> Served (Consumed)</button>
+                                        <button class="text-error-dark hover:text-error-dark/80 text-sm" onclick="alert('Cancelling reservation #1004')"><i class="fas fa-times"></i> Cancel</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Menu Management Section -->
+            <section id="menu" class="content-section hidden space-y-6">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-2xl font-bold text-dark">Menu Item</h3>
+                    <button class="bg-btn text-white px-4 py-2 rounded-lg font-semibold shadow-md hover-bg-btn transition-colors" onclick="alert('Opening modal for New Menu Item')">
+                        <i class="fas fa-plus mr-2"></i>Add New Item
+                    </button>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-border-gray">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Menu Item Card 1 -->
+                        <div class="border border-border-gray rounded-xl overflow-hidden shadow-md">
+                            <div class="h-32 bg-gray-100 flex items-center justify-center text-text-gray">
+                                <!-- Placeholder for image -->
+                                <i class="fas fa-image text-4xl"></i>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="text-xl font-bold text-dark">Sinigang na Hipon</h4>
+                                <p class="text-text-gray text-sm mt-1">Shrimp in sour tamarind broth.</p>
+                                <div class="flex justify-between items-center mt-3">
+                                    <span class="text-2xl font-extrabold text-brand">₱350</span>
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-bg-success text-success-dark">Available</span>
+                                </div>
+                                <div class="mt-4 flex space-x-2">
+                                    <button class="flex-1 bg-light-orange text-brand py-2 rounded-lg font-semibold hover:bg-light-orange/80" onclick="alert('Editing Sinigang Item')"><i class="fas fa-edit"></i> Edit</button>
+                                    <button class="flex-1 bg-bg-error text-error-dark py-2 rounded-lg font-semibold hover:bg-bg-error/80" onclick="alert('Deleting Sinigang Item')"><i class="fas fa-trash-alt"></i> Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Menu Item Card 2 -->
+                        <div class="border border-border-gray rounded-xl overflow-hidden shadow-md">
+                            <div class="h-32 bg-gray-100 flex items-center justify-center text-text-gray">
+                                <!-- Placeholder for image -->
+                                <i class="fas fa-image text-4xl"></i>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="text-xl font-bold text-dark">Leche Flan</h4>
+                                <p class="text-text-gray text-sm mt-1">Sweet custard with soft caramel.</p>
+                                <div class="flex justify-between items-center mt-3">
+                                    <span class="text-2xl font-extrabold text-brand">₱120</span>
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-bg-error text-error-dark">Out of Stock</span>
+                                </div>
+                                <div class="mt-4 flex space-x-2">
+                                    <button class="flex-1 bg-light-orange text-brand py-2 rounded-lg font-semibold hover:bg-light-orange/80" onclick="alert('Editing Leche Flan')"><i class="fas fa-edit"></i> Edit</button>
+                                    <button class="flex-1 bg-bg-error text-error-dark py-2 rounded-lg font-semibold hover:bg-bg-error/80" onclick="alert('Deleting Leche Flan')"><i class="fas fa-trash-alt"></i> Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Menu Item Card 3 -->
+                        <div class="border border-border-gray rounded-xl overflow-hidden shadow-md">
+                            <div class="h-32 bg-gray-100 flex items-center justify-center text-text-gray">
+                                <!-- Placeholder for image -->
+                                <i class="fas fa-image text-4xl"></i>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="text-xl font-bold text-dark">Pinakbet</h4>
+                                <p class="text-text-gray text-sm mt-1">Mixed vegetables stew.</p>
+                                <div class="flex justify-between items-center mt-3">
+                                    <span class="text-2xl font-extrabold text-brand">₱280</span>
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-bg-success text-success-dark">Available</span>
+                                </div>
+                                <div class="mt-4 flex space-x-2">
+                                    <button class="flex-1 bg-light-orange text-brand py-2 rounded-lg font-semibold hover:bg-light-orange/80" onclick="alert('Editing Pinakbet')"><i class="fas fa-edit"></i> Edit</button>
+                                    <button class="flex-1 bg-bg-error text-error-dark py-2 rounded-lg font-semibold hover:bg-bg-error/80" onclick="alert('Deleting Pinakbet')"><i class="fas fa-trash-alt"></i> Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Analytics Section -->
+            <section id="analytics" class="content-section hidden space-y-6">
+                <h3 class="text-2xl font-bold text-dark">Sales & Order Analysis</h3>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-border-gray space-y-6">
+                    <div class="flex flex-wrap gap-4 items-center">
+                        <h4 class="text-xl font-bold text-dark">Food Popularity Report</h4>
+                        <select class="p-2 border border-border-gray rounded-lg">
+                            <option>View: Last 7 Days</option>
+                            <option>Last 30 Days</option>
+                            <option>Last 12 Months</option>
+                        </select>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-border-gray">
+                            <thead class="bg-light-orange">
+                                <tr>
+                                    <th class="px-4 py-2 text-left text-sm font-bold text-dark">Rank</th>
+                                    <th class="px-4 py-2 text-left text-sm font-bold text-dark">Item Name</th>
+                                    <th class="px-4 py-2 text-left text-sm font-bold text-dark">Orders Count</th>
+                                    <th class="px-4 py-2 text-left text-sm font-bold text-dark">Total Revenue</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-border-gray">
+                                <tr class="hover:bg-bg-cream transition-colors">
+                                    <td class="px-4 py-3 text-sm font-extrabold text-brand">1</td>
+                                    <td class="px-4 py-3 text-sm text-dark">Chicken Adobo</td>
+                                    <td class="px-4 py-3 text-sm text-text-gray">120</td>
+                                    <td class="px-4 py-3 text-sm text-dark">₱18,000.00</td>
+                                </tr>
+                                <tr class="hover:bg-bg-cream transition-colors">
+                                    <td class="px-4 py-3 text-sm font-extrabold text-brand">2</td>
+                                    <td class="px-4 py-3 text-sm text-dark">Beef Caldereta</td>
+                                    <td class="px-4 py-3 text-sm text-text-gray">85</td>
+                                    <td class="px-4 py-3 text-sm text-dark">₱14,450.00</td>
+                                </tr>
+                                <tr class="hover:bg-bg-cream transition-colors">
+                                    <td class="px-4 py-3 text-sm font-extrabold text-brand">3</td>
+                                    <td class="px-4 py-3 text-sm text-dark">Halo-Halo</td>
+                                    <td class="px-4 py-3 text-sm text-text-gray">72</td>
+                                    <td class="px-4 py-3 text-sm text-dark">₱8,640.00</td>
+                                </tr>
+                                <tr class="hover:bg-bg-cream transition-colors">
+                                    <td class="px-4 py-3 text-sm font-extrabold text-brand">4</td>
+                                    <td class="px-4 py-3 text-sm text-dark">Sinigang na Hipon</td>
+                                    <td class="px-4 py-3 text-sm text-text-gray">60</td>
+                                    <td class="px-4 py-3 text-sm text-dark">₱21,000.00</td>
+                                </tr>
+                                <!-- Data continues (most to least ordered) -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Placeholder for Chart Visualization -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-border-gray">
+                    <h4 class="text-xl font-bold text-dark mb-4">Weekly Sales Performance</h4>
+                    <div class="h-64 flex items-center justify-center text-text-gray">
+                        [Chart Placeholder: e.g., A Line Chart showing daily revenue]
+                    </div>
+                </div>
+
+            </section>
+            
+            <!-- 5. User & Staff Management Section -->
+            <section id="users" class="content-section hidden space-y-6">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-2xl font-bold text-dark">User & Staff Access Control</h3>
+                    <button class="bg-btn text-white px-4 py-2 rounded-lg font-semibold shadow-md hover-bg-btn transition-colors" onclick="alert('Opening modal to Add Super Admin')">
+                        <i class="fas fa-user-plus mr-2"></i>Add Staff/Super-Admin
+                    </button>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-border-gray">
+                    <h4 class="text-xl font-bold text-dark mb-4">Staff Accounts</h4>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-border-gray">
+                            <thead class="bg-light-orange">
+                                <tr>
+                                    <th class="px-4 py-2 text-left text-sm font-bold text-dark">Name</th>
+                                    <th class="px-4 py-2 text-left text-sm font-bold text-dark">Email</th>
+                                    <th class="px-4 py-2 text-left text-sm font-bold text-dark">Role</th>
+                                    <th class="px-4 py-2 text-left text-sm font-bold text-dark">Status</th>
+                                    <th class="px-4 py-2 text-left text-sm font-bold text-dark">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-border-gray">
+                                <tr class="hover:bg-bg-cream transition-colors">
+                                    <td class="px-4 py-3 text-sm font-medium text-dark">Admin User (You)</td>
+                                    <td class="px-4 py-3 text-sm text-text-gray">admin@system.com</td>
+                                    <td class="px-4 py-3"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-brand/30 text-dark">Super Admin</span></td>
+                                    <td class="px-4 py-3"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-bg-success text-success-dark">Active</span></td>
+                                    <td class="px-4 py-3 text-sm space-x-2">
+                                        <button class="text-text-gray hover:text-dark" onclick="alert('Editing Admin User')"><i class="fas fa-edit"></i></button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-bg-cream transition-colors">
+                                    <td class="px-4 py-3 text-sm font-medium text-dark">Kitchen Staff</td>
+                                    <td class="px-4 py-3 text-sm text-text-gray">kitchen@system.com</td>
+                                    <td class="px-4 py-3"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-text-gray/30 text-dark">Staff</span></td>
+                                    <td class="px-4 py-3"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-bg-success text-success-dark">Active</span></td>
+                                    <td class="px-4 py-3 text-sm space-x-2">
+                                        <button class="text-text-gray hover:text-dark" onclick="alert('Editing Kitchen Staff')"><i class="fas fa-edit"></i></button>
+                                        <button class="text-error-dark hover:text-error-dark/80" onclick="alert('Deleting Kitchen Staff')"><i class="fas fa-trash-alt"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 6. System Settings Section -->
+            <section id="settings" class="content-section hidden space-y-6">
+                <h3 class="text-2xl font-bold text-dark">System & Configuration</h3>
+                
+                <!-- Operating Hours (Closing Time) -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-border-gray">
+                    <h4 class="text-xl font-bold text-dark mb-4 flex items-center"><i class="fas fa-clock mr-2 text-brand"></i>Operating Hours</h4>
+                    <p class="text-text-gray mb-4">Set the times for accepting reservations/orders, including the **closing time**.</p>
+                    <div class="grid grid-cols-2 gap-4 max-w-md">
+                        <div>
+                            <label class="block text-sm font-medium text-text-gray mb-1">Opening Time</label>
+                            <input type="time" value="10:00" class="w-full p-2 border border-border-gray rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-text-gray mb-1">Closing Time</label>
+                            <input type="time" value="21:00" class="w-full p-2 border border-border-gray rounded-lg">
+                        </div>
+                    </div>
+                    <button class="mt-4 bg-btn text-white px-4 py-2 rounded-lg font-semibold hover-bg-btn" onclick="alert('Saved Operating Hours')">Save Hours</button>
+                </div>
+
+            </section>
+
+            <!-- 7. Activity Logs Section -->
+            <section id="logs" class="content-section hidden space-y-6">
+                <h3 class="text-2xl font-bold text-dark">System Activity & History (<span class="font-normal">Add logs history</span>)</h3>
+                
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-border-gray">
+                    <div class="space-y-4">
+                        <div class="p-3 bg-bg-cream rounded-lg border-l-4 border-brand">
+                            <p class="text-sm font-semibold text-dark">Super Admin <span class="text-brand">(You)</span> updated the price of 'Sinigang na Hipon' to **₱350.00**.</p>
+                            <p class="text-xs text-text-gray mt-1">2023-11-27 10:45 AM</p>
+                        </div>
+                        <div class="p-3 bg-bg-cream rounded-lg border-l-4 border-success-dark">
+                            <p class="text-sm font-semibold text-dark">System confirmed reservation **#1004** for Robert Lee.</p>
+                            <p class="text-xs text-text-gray mt-1">2023-11-27 09:15 AM</p>
+                        </div>
+                        <div class="p-3 bg-bg-cream rounded-lg border-l-4 border-text-gray">
+                            <p class="text-sm font-semibold text-dark">Kitchen Staff marked order **#1000** as **Served** (Update meal if consumed).</p>
+                            <p class="text-xs text-text-gray mt-1">2023-11-26 07:30 PM</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Custom Modal UI for Alerts (Replaces alert()) -->
+            <div id="custom-alert" class="hidden fixed inset-0 bg-text-dark/50 z-50 flex items-center justify-center p-4">
+                <div class="bg-white p-6 rounded-xl shadow-2xl max-w-sm w-full text-center">
+                    <i class="fas fa-exclamation-circle text-3xl text-brand mb-3"></i>
+                    <p id="alert-message" class="text-dark font-semibold mb-4"></p>
+                    <button id="alert-ok-btn" class="bg-btn text-white px-6 py-2 rounded-lg font-semibold hover-bg-btn">OK</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navItems = document.querySelectorAll('.nav-item');
+            const contentSections = document.querySelectorAll('.content-section');
+            const pageTitle = document.getElementById('page-title');
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.getElementById('menu-toggle');
+            const closeMenu = document.getElementById('close-menu');
+            
+            // Custom Alert elements
+            const customAlert = document.getElementById('custom-alert');
+            const alertMessage = document.getElementById('alert-message');
+            const alertOkBtn = document.getElementById('alert-ok-btn');
+
+            // Override global alert function
+            window.alert = function(message) {
+                alertMessage.textContent = message;
+                customAlert.classList.remove('hidden');
+            };
+
+            alertOkBtn.addEventListener('click', () => {
+                customAlert.classList.add('hidden');
+            });
+
+            // Function to switch between sections
+            window.switchSection = function(targetId) {
+                // 1. Hide all content sections
+                contentSections.forEach(section => {
+                    section.classList.add('hidden');
+                    section.classList.remove('active');
+                });
+
+                // 2. Deactivate all navigation items
+                navItems.forEach(item => {
+                    item.classList.remove('bg-white', 'text-brand', 'shadow-md');
+                    item.classList.add('hover:bg-white/20');
+                });
+
+                // 3. Show the target section
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.classList.remove('hidden');
+                    targetSection.classList.add('active');
+                    
+                    // 4. Update the page title
+                    let titleText = targetSection.querySelector('h3') ? targetSection.querySelector('h3').textContent : targetId.charAt(0).toUpperCase() + targetId.slice(1);
+                    if(targetId === 'dashboard') {
+                        titleText = 'Dashboard Overview';
+                    } else if (targetId === 'logs') {
+                         titleText = 'System Activity & History';
+                    }
+                    pageTitle.textContent = titleText;
+                }
+
+                // 5. Activate the corresponding navigation item
+                const activeNavItem = document.querySelector(`.nav-item[data-section="${targetId}"]`);
+                if (activeNavItem) {
+                    activeNavItem.classList.add('bg-white', 'text-brand', 'shadow-md');
+                    activeNavItem.classList.remove('hover:bg-white/20');
+                }
+
+                // 6. Close sidebar on mobile after selection
+                if (window.innerWidth < 768) {
+                    sidebar.classList.remove('sidebar-open');
+                }
+            };
+
+            // Event listeners for navigation links
+            navItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = item.getAttribute('data-section');
+                    switchSection(targetId);
+                });
+            });
+
+            // Mobile menu toggling
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.add('sidebar-open');
+            });
+            
+            closeMenu.addEventListener('click', () => {
+                sidebar.classList.remove('sidebar-open');
+            });
+
+
+            // Initialize to the Dashboard section
+            switchSection('dashboard');
+        });
+    </script>
+</body>
+</html>
