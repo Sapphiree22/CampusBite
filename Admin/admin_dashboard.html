@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | CampusBite</title>
+    <title> CampusBite | Admin </title>
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Load Font Awesome for Icons -->
@@ -25,7 +25,7 @@
     <!-- Sidebar / Navigation -->
     <aside id="sidebar" class="sidebar bg-brand text-white p-6 shadow-2xl flex-shrink-0">
         <div class="flex justify-between items-center mb-10">
-            <h1 class="text-3xl font-extrabold tracking-tight">Admin Console</h1>
+            <h1 class="text-3xl font-extrabold tracking-tight">CampusBite | Admin </h1>
             <button id="close-menu" class="md:hidden text-white opacity-75 hover:opacity-100">
                 <i class="fas fa-times text-2xl"></i>
             </button>
@@ -257,7 +257,7 @@
             <!-- 3. Menu Management Section -->
             <section id="menu" class="content-section hidden space-y-6">
                 <div class="flex justify-between items-center">
-                    <h3 class="text-2xl font-bold text-dark">Menu Item CRUD</h3>
+                    <h3 class="text-2xl font-bold text-dark">Menu Item</h3>
                     <button class="bg-btn text-white px-4 py-2 rounded-lg font-semibold shadow-md hover-bg-btn transition-colors" onclick="alert('Opening modal for New Menu Item')">
                         <i class="fas fa-plus mr-2"></i>Add New Item
                     </button>
@@ -456,22 +456,6 @@
                         </div>
                     </div>
                     <button class="mt-4 bg-btn text-white px-4 py-2 rounded-lg font-semibold hover-bg-btn" onclick="alert('Saved Operating Hours')">Save Hours</button>
-                </div>
-
-                <!-- Payment Configuration -->
-                <div class="bg-white p-6 rounded-xl shadow-lg border border-border-gray">
-                    <h4 class="text-xl font-bold text-dark mb-4 flex items-center"><i class="fas fa-credit-card mr-2 text-brand"></i>Payment Methods (<span class="font-normal">Add payment</span>)</h4>
-                    <div class="space-y-3 max-w-lg">
-                        <div class="flex items-center justify-between p-3 border border-border-gray rounded-lg">
-                            <label class="text-dark font-medium">Cash on Delivery (COD)</label>
-                            <input type="checkbox" checked class="h-5 w-5 text-brand border-border-gray rounded">
-                        </div>
-                        <div class="flex items-center justify-between p-3 border border-border-gray rounded-lg">
-                            <label class="text-dark font-medium">Online Payment (Gateway)</label>
-                            <input type="checkbox" class="h-5 w-5 text-brand border-border-gray rounded">
-                        </div>
-                        <p class="text-sm text-error-dark">To enable online payments, you must configure the API key in a secure section.</p>
-                    </div>
                 </div>
 
             </section>
