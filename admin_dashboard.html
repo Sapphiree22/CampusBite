@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> CampusBite | Admin </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #aaa; }
+    </style>
+</head>
+<body class="flex flex-col md:flex-row h-screen overflow-hidden bg-gray-50">
+
+    <aside id="sidebar" class="sidebar bg-brand text-white p-6 shadow-2xl flex-shrink-0 w-full md:w-64 flex flex-col transition-all duration-300">
+        
+        <div class="mb-10 text-center">
+            <h1 class="text-3xl font-extrabold tracking-tight text-white">CampusBite</h1>
+            <div class="h-0.5 w-full bg-white/20 my-3 rounded"></div>
+            <p class="text-sm uppercase tracking-[0.2em] text-white/80 font-bold">Admin</p>
+        </div>
+        
+        <nav class="flex-grow overflow-y-auto custom-scrollbar">
+            <ul class="space-y-2">
+                <li><button onclick="switchSection('dashboard')" class="nav-item w-full flex items-center p-3 rounded-lg font-semibold bg-white text-brand shadow-md transition-all duration-200 text-left"><i class="fas fa-th-large w-6"></i><span class="ml-3">Dashboard</span></button></li>
+                <li><button onclick="switchSection('reservations')" class="nav-item w-full flex items-center p-3 rounded-lg font-semibold hover:bg-white/20 text-white transition-all duration-200 text-left"><i class="fas fa-calendar-check w-6"></i><span class="ml-3">Reservations</span></button></li>
+                <li><button onclick="switchSection('menu')" class="nav-item w-full flex items-center p-3 rounded-lg font-semibold hover:bg-white/20 text-white transition-all duration-200 text-left"><i class="fas fa-utensils w-6"></i><span class="ml-3">Menu & Stock</span></button></li>
+                <li><button onclick="switchSection('analytics')" class="nav-item w-full flex items-center p-3 rounded-lg font-semibold hover:bg-white/20 text-white transition-all duration-200 text-left"><i class="fas fa-chart-pie w-6"></i><span class="ml-3">Analytics</span></button></li>
+                <li><button onclick="switchSection('users')" class="nav-item w-full flex items-center p-3 rounded-lg font-semibold hover:bg-white/20 text-white transition-all duration-200 text-left"><i class="fas fa-users w-6"></i><span class="ml-3">Users & Staff</span></button></li>
+                <li><button onclick="switchSection('logs')" class="nav-item w-full flex items-center p-3 rounded-lg font-semibold hover:bg-white/20 text-white transition-all duration-200 text-left"><i class="fas fa-history w-6"></i><span class="ml-3">Activity Logs</span></button></li>
+            </ul>
+        </nav>
+        
+        <div class="mt-8 pt-4 border-t border-white/20">
+            <a href="logout.php" id="logout-btn" class="flex items-center w-full p-3 rounded-lg font-semibold bg-red-500 text-white hover:bg-red-600 transition-colors shadow-sm">
+                <i class="fas fa-sign-out-alt w-6"></i><span class="ml-3">Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <main class="flex-grow p-6 md:p-10 custom-scrollbar overflow-y-auto">
+        
+        <header class="mb-8 flex justify-between items-end">
+            <div>
+                <h2 id="page-title" class="text-3xl font-extrabold text-gray-800">Dashboard Overview</h2>
+                <p class="text-gray-500 mt-1">Overview of system performance.</p>
+            </div>
+            <button id="menu-toggle" class="md:hidden p-2 bg-brand text-white rounded shadow"><i class="fas fa-bars"></i></button>
+        </header>
+
+        <div id="content-area" class="space-y-8">
+            
+            <section id="dashboard" class="content-section active space-y-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-green-500 flex justify-between items-center">
+                        <div><p class="text-gray-500 text-sm font-bold uppercase">Revenue</p><p id="stat-revenue" class="text-3xl font-bold text-gray-800 mt-1">Loading...</p></div>
+                        <div class="p-3 bg-green-100 text-green-600 rounded-full"><i class="fas fa-dollar-sign text-xl"></i></div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-blue-500 flex justify-between items-center">
+                        <div><p class="text-gray-500 text-sm font-bold uppercase">Reservations</p><p id="stat-reservations" class="text-3xl font-bold text-gray-800 mt-1">0</p></div>
+                        <div class="p-3 bg-blue-100 text-blue-600 rounded-full"><i class="fas fa-calendar-check text-xl"></i></div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-purple-500 flex justify-between items-center">
+                        <div><p class="text-gray-500 text-sm font-bold uppercase">Active Users</p><p id="stat-users" class="text-3xl font-bold text-gray-800 mt-1">0</p></div>
+                        <div class="p-3 bg-purple-100 text-purple-600 rounded-full"><i class="fas fa-users text-xl"></i></div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
+                            <h3 class="font-bold text-lg text-gray-800">Pending Reservations</h3>
+                            <button onclick="switchSection('reservations')" class="text-sm text-brand font-semibold hover:underline cursor-pointer text-blue-600">View All</button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-sm">
+                                <thead class="bg-gray-100 text-gray-500 uppercase text-xs">
+                                    <tr><th class="p-4">Customer</th><th class="p-4">Time</th><th class="p-4">Status</th><th class="p-4 text-right">Action</th></tr>
+                                </thead>
+                                <tbody id="dashboard-reservations" class="divide-y divide-gray-100"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 h-fit">
+                        <div class="p-6 border-b border-gray-100 bg-gray-50"><h3 class="font-bold text-lg text-gray-800">Quick Actions</h3></div>
+                        <div class="p-6 space-y-3">
+                            <button onclick="switchSection('menu')" class="w-full flex items-center justify-between p-3 bg-gray-50 hover:bg-brand hover:text-white rounded-lg transition group cursor-pointer border border-gray-200">
+                                <span class="font-medium">Add Menu Item</span><i class="fas fa-plus text-gray-400 group-hover:text-white"></i>
+                            </button>
+                            <button onclick="switchSection('analytics')" class="w-full flex items-center justify-between p-3 bg-gray-50 hover:bg-blue-500 hover:text-white rounded-lg transition group cursor-pointer border border-gray-200">
+                                <span class="font-medium">View Sales Report</span><i class="fas fa-chart-line text-gray-400 group-hover:text-white"></i>
+                            </button>
+                            <button onclick="switchSection('users')" class="w-full flex items-center justify-between p-3 bg-gray-50 hover:bg-purple-500 hover:text-white rounded-lg transition group cursor-pointer border border-gray-200">
+                                <span class="font-medium">Manage Staff</span><i class="fas fa-user-shield text-gray-400 group-hover:text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="reservations" class="content-section hidden space-y-8">
+                <div class="bg-white shadow-sm border border-gray-100 rounded-xl p-6 flex justify-between items-center">
+                    <div><h4 class="text-xl font-bold text-gray-800">System Status</h4><p class="text-sm text-text-gray">Control booking availability.</p></div>
+                    <div class="flex items-center space-x-4">
+                        <span id="system-status-value" class="font-extrabold text-2xl tracking-wider">...</span>
+                        <button id="toggle-status-btn" class="bg-gray-800 text-white px-6 py-2 rounded-lg hover:bg-gray-700 transition shadow">Toggle</button>
+                    </div>
+                </div>
+                <div class="bg-white shadow-sm border border-gray-100 rounded-xl overflow-hidden">
+                    <div class="p-6 border-b border-gray-100 bg-gray-50"><h4 class="font-bold text-lg text-gray-800">All Reservations</h4></div>
+                    <div class="overflow-x-auto"><table class="w-full text-left"><thead class="bg-brand text-white"><tr><th class="p-4">ID</th><th class="p-4">Customer</th><th class="p-4">Date & Time</th><th class="p-4">Status</th><th class="p-4">Actions</th></tr></thead><tbody id="reservations-management-tbody" class="text-gray-700"></tbody></table></div>
+                </div>
+            </section>
+
+            <section id="menu" class="content-section hidden space-y-8">
+                <div class="bg-white shadow-sm border border-gray-100 rounded-xl p-6">
+                    <h4 class="text-xl font-bold mb-6 text-gray-800 border-b pb-2">Add New Menu Item</h4>
+                    <form id="add-menu-item-form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div><label class="block text-sm font-medium text-gray-700 mb-1">Item Name</label><input type="text" name="name" class="w-full border rounded-lg px-4 py-2" required></div>
+                        <div><label class="block text-sm font-medium text-gray-700 mb-1">Category</label><input type="text" name="category" class="w-full border rounded-lg px-4 py-2" required></div>
+                        <div><label class="block text-sm font-medium text-gray-700 mb-1">Price (₱)</label><input type="number" name="price" step="0.01" class="w-full border rounded-lg px-4 py-2" required></div>
+                        <div><label class="block text-sm font-medium text-gray-700 mb-1">Initial Stock</label><input type="number" name="stock" class="w-full border rounded-lg px-4 py-2" required></div>
+                        <div class="md:col-span-2"><label class="block text-sm font-medium text-gray-700 mb-1">Upload Image</label><input type="file" name="image" accept="image/*" class="w-full border rounded-lg p-2 bg-gray-50"></div>
+                        <button type="submit" class="bg-brand text-white px-6 py-3 rounded-lg hover:bg-opacity-90 md:col-span-2 font-bold shadow-md transition"><i class="fas fa-plus mr-2"></i> Add Item to Menu</button>
+                    </form>
+                </div>
+                <div class="bg-white shadow-sm border border-gray-100 rounded-xl overflow-hidden">
+                    <table id="menu-items-table" class="w-full text-left"><thead class="bg-gray-100 text-gray-600 uppercase text-xs font-bold"><tr><th class="p-4">Image</th><th class="p-4">Name</th><th class="p-4">Price</th><th class="p-4">Stock</th><th class="p-4">Actions</th></tr></thead><tbody class="text-gray-700 divide-y divide-gray-100"></tbody></table>
+                </div>
+            </section>
+
+            <section id="analytics" class="content-section hidden space-y-8">
+                <div class="flex justify-between items-center bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                    <h3 class="text-xl font-bold text-gray-800">Sales Reports</h3>
+                    <select id="analytics-period" class="border-2 border-brand text-brand font-bold rounded-lg px-4 py-2 focus:outline-none"><option value="today">Today</option><option value="week" selected>This Week</option><option value="month">This Month</option><option value="year">This Year</option></select>
+                </div>
+                <div class="bg-white shadow-sm border border-gray-100 rounded-xl p-6 h-96 relative"><canvas id="salesChart"></canvas></div>
+            </section>
+
+            <section id="users" class="content-section hidden space-y-8">
+                <div class="bg-white shadow-sm border border-gray-100 rounded-xl p-6"><h3 class="font-bold text-lg mb-4 text-gray-800">Registered Customers</h3><table class="w-full text-left"><thead class="bg-gray-100 text-gray-600"><tr><th class="p-3">Name</th><th class="p-3">Email</th><th class="p-3">Course</th></tr></thead><tbody id="users-table-body" class="divide-y divide-gray-100"></tbody></table></div>
+                <div class="bg-white shadow-sm border border-gray-100 rounded-xl p-6"><h3 class="font-bold text-lg mb-4 text-gray-800">Staff List</h3><table class="w-full text-left"><thead class="bg-gray-100 text-gray-600"><tr><th class="p-3">Username</th><th class="p-3">Role</th></tr></thead><tbody id="staff-table-body" class="divide-y divide-gray-100"></tbody></table></div>
+            </section>
+
+            <section id="logs" class="content-section hidden space-y-8">
+                <div class="bg-white shadow-sm border border-gray-100 rounded-xl overflow-hidden">
+                    <div class="p-6 bg-gray-50 border-b border-gray-100"><h3 class="font-bold text-lg text-gray-800">System Activity Logs</h3></div>
+                    <table class="w-full text-left"><thead class="bg-gray-100 text-gray-600"><tr><th class="p-4">Time</th><th class="p-4">Action</th><th class="p-4">Details</th></tr></thead><tbody id="logs-table-body" class="divide-y divide-gray-100 text-sm"></tbody></table>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

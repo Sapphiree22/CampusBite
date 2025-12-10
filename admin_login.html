@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CampusBite | Admin Login</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+
+<body>
+
+    <div id="toast-box"></div>
+
+    <header class="top-navbar">
+        <a href="index.html" class="nav-back"><i data-lucide="arrow-left"></i> Back</a>
+
+        <div class="nav-logo-container">
+            <img src="images/CampusBiteLogo.png" alt="CampusBite Logo" class="nav-logo-img">
+            <div class="logo-text">Campus<span>Bite Admin</span></div>
+        </div>
+    </header>
+
+    <div class="login-container">
+        <h2>Administrator Login</h2>
+        <p class="subtitle">Restricted access</p>
+
+        <form id="adminLoginForm" method="POST" action="admin_login.php">
+            <input type="text" name="adminUser" class="input-field" placeholder="Admin Username" required>
+            <input type="password" name="adminPass" class="input-field" placeholder="Password" required>
+            <button type="submit" class="login-btn"><i data-lucide="shield-check"></i> Log In</button>
+        </form>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        function showToast(message, type = 'info') {
+            const box = document.getElementById('toast-box');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerText = message;
+            box.appendChild(toast);
+            // Remove the toast after 3 seconds
+            setTimeout(() => { toast.remove(); }, 3000);
+        }
+        const params = new URLSearchParams(window.location.search);
+        const error = params.get("error");
+
+        if (error === "invalid") showToast("Invalid username or password", "error");
+        if (error === "required") showToast("Please enter your credentials", "error");
+        if (error === "db") showToast("Database connection error. Check server logs.", "error");
+    </script>
+</body>
+</html>

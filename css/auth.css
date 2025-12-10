@@ -1,0 +1,123 @@
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: "Inter", sans-serif; }
+
+body {
+    background: #fff6ef;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    padding-top: 90px; /* Space for fixed header */
+}
+
+/* --- NAVBAR --- */
+.top-navbar {
+    position: fixed; top: 0; left: 0; width: 100%; height: 70px; background: white;
+    display: flex; align-items: center; padding: 0 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05); z-index: 1000;
+}
+
+.nav-back {
+    display: flex; align-items: center; gap: 8px; text-decoration: none;
+    color: #4b5563; font-weight: 500; font-size: 15px; transition: color 0.2s; z-index: 2;
+}
+.nav-back:hover { color: #ff5b00; }
+
+/* --- LOGO --- */
+.nav-logo-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 1; 
+}
+
+.nav-logo-img {
+    height: 35px;
+    width: auto;
+    object-fit: contain;
+}
+
+.logo-text { font-size: 19px; font-weight: 700; color: #1f2937; }
+.logo-text span { color: #ff5b00; }
+
+/* --- AUTH CONTAINER (Login/Signup Card) --- */
+.login-container, .signup-container {
+    background: white; width: 100%; max-width: 420px; padding: 35px;
+    border-radius: 14px; box-shadow: 0px 8px 20px rgba(0,0,0,0.1); text-align: center;
+}
+
+h2 { font-size: 26px; font-weight: 700; color: #1f2937; }
+.subtitle { margin-top: 8px; color: #6b7280; font-size: 14px; margin-bottom: 25px; }
+
+/* --- INPUTS --- */
+.input-box { text-align: left; margin-bottom: 15px; }
+label { font-size: 14px; font-weight: 500; color: #374151; }
+
+.input-field, select {
+    width: 100%; padding: 12px; border: 1.5px solid #ddd; border-radius: 8px;
+    margin-top: 6px; font-size: 14px; background-color: #fff;
+    transition: border 0.3s;
+}
+
+.input-field:focus, select:focus { border-color: #ff5b00; outline: none; }
+.input-error { border-color: #ef4444 !important; background-color: #fef2f2; }
+
+/* --- BUTTONS --- */
+.login-btn, .signup-btn {
+    width: 100%; background: #ff5b00; color: white; padding: 12px 0; border: none;
+    border-radius: 8px; font-size: 15px; margin-top: 10px; cursor: pointer;
+    display: flex; justify-content: center; align-items: center; font-weight: 600; gap: 6px;
+    transition: background 0.3s;
+}
+.login-btn:hover, .signup-btn:hover { background: #e04f00; }
+.login-btn:disabled { background: #fdba8c; cursor: not-allowed; }
+
+/* --- LINKS --- */
+.forgot-link {
+    display: block; text-align: right; margin-top: -10px; margin-bottom: 20px;
+    font-size: 13px; color: #6b7280; text-decoration: none; cursor: pointer;
+}
+.forgot-link:hover { color: #ff5b00; }
+
+.signup-text, .login-text { margin-top: 18px; font-size: 14px; color: #6b7280; }
+.signup-text a, .login-text a { color: #ff5b00; text-decoration: none; font-weight: 600; }
+
+/* --- TOAST NOTIFICATIONS --- */
+#toast-box {
+    position: fixed; top: 30px; left: 50%; transform: translateX(-50%);
+    z-index: 9999; display: flex; flex-direction: column; gap: 10px;
+}
+.toast {
+    min-width: 300px; background: white; padding: 12px 20px; border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 10px;
+    font-size: 14px; font-weight: 500; animation: slideIn 0.3s ease-out;
+    border-left: 4px solid #333;
+}
+.toast.success { border-left-color: #10b981; color: #065f46; }
+.toast.error { border-left-color: #ef4444; color: #7f1d1d; }
+.toast.info { border-left-color: #3b82f6; color: #1e3a8a; }
+
+@keyframes slideIn {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* --- MODAL (Forgot Password) --- */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center;
+    z-index: 2000; backdrop-filter: blur(2px);
+}
+.modal-content {
+    background: white; padding: 30px; border-radius: 12px; width: 90%; max-width: 360px; text-align: center;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); animation: popUp 0.3s ease;
+}
+@keyframes popUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+.modal-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+.modal-desc { font-size: 13px; color: #6b7280; margin-bottom: 20px; line-height: 1.5; }
+.close-modal { margin-top: 15px; background: transparent; color: #6b7280; border: none; cursor: pointer; font-size: 13px; text-decoration: underline; }
+.otp-field { text-align: center; letter-spacing: 8px; font-size: 18px; font-weight: 700; }
